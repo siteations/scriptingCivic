@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+ 	<title>Landscape</title>
+ 	<!--stylesheets -->
+ 	<link rel="stylesheet" href="./css/bootstrap.css">
+ 	<link rel="stylesheet" href="./css/font-awesome.css">
+	<link rel="stylesheet" href="./css/custom.css">
+	<!--scripts defered-->
+  <script src="./js/jquery-3.2.1.min.js" defer ></script>
+  <script src="./js/popper.js" defer ></script>
+  <script src="./js/bootstrap.js" defer ></script>
+  <script src="./data/test.js" defer ></script>
+  <script src="./js/svgInteractions.js" defer ></script>
+</head>
+<body>
+	<div class="center-block" id="svgHere">
+	<!--<object id="start" data="./img/combo.svg" type="image/svg+xml" style="visibility:hidden" />-->
+	</div>
+
+	<div class="row header">
+		<div class="col-2 text-center topMenu">
+			<h4 class='pgTitle' id="titleBtn">dams & datums</h4>
+		</div>
+		<div class="col text-center topMenu">
+			<button type="button" class="btn btn-outline-secondary btn-block" id="homeBtn">about</button>
+		</div>
+		<div class="col text-center topMenu">
+			<button type="button" class="btn btn-outline-secondary btn-block" id="siteBtn">site</button>
+		</div>
+		<div class="col text-center">
+			<button type="button" class="btn btn-outline-secondary btn-block" id="iconBtn">flora . fauna . process</button>
+		</div>
+		<div class="col text-center">
+			<button type="button" class="btn btn-outline-secondary btn-block" id="programBtn">program</button>
+		</div>
+		<div class="col text-center">
+			<button type="button" class="btn btn-outline-secondary btn-block" id="seasonsBtn">seasons</button>
+		</div>
+	</div>
+
+	<div class="row footer">
+		<div class="col text-center pgMenu">
+			<h5 class='pgTitle'><span id="pgChoice">click top menu for </span> > options</h5>
+		</div>
+	</div>
+
+	<div class='imgTest'>
+		<img id="test" />
+	</div>
+
+	<!-- Right Modal: Contents to be dynamically updated-->
+<div class="modal fade" id="rightModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog rightModal" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title eveleth" id="rightModalLabel">Modal title</h5>
+      </div>
+      <div class="modal-body" id="rightModalBody">
+        ...
+      </div>
+    </div>
+  </div>
+</div>
+
+	<!-- Bottom Modal: Contents to be dynamically updated-->
+<div class="modal fade" id="bottomModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg bottomModal" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title eveleth" id="bottomModalLabel">Dams & datums > about</h6>
+      </div>
+      <div class="modal-body" id="bottomModalBody">
+        ...
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
