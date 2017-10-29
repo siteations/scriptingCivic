@@ -135,7 +135,7 @@ const loadPoster = function(){
 		visInit()
 
 		//initial layer manipulation - hide or fade off specific layers...
-		$('#slideImage1').attr('xlink:href', "../../doc/img/manifesto.jpg").attr('style', "")
+		$('#slideImage1').attr('xlink:href', "../img/manifesto.jpg").attr('style', "")
 
 		//set up initial visibilities
 		visHide(['plan', 'section1', 'section2', 'scale_and_north', 'slideImage2', 'overlays'], 'id')
