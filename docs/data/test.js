@@ -36,26 +36,26 @@ var jsonData = {
         posterOpt: {
             fade: {layers:['plan', 'section1', 'section2', 'scale_and_north', 'slideImage2', 'overlays'], type:'id'},
             click: {layers:['slideImage1'], actions:[{show: 'bottomModal'}]},
-            updates: {layers:['slideImage1', 'slideImage1','slideImage1', 'bottomModalBody', 'bottomModalLabel'], contents: [['xlink:href', "../img/manifesto.jpg"],['style', ""],['height', 900],'placeholder text for poster/project introduction', 'Dams & datums > manifesto' ]}
+            updates: {layers:['slideImage1', 'slideImage1','slideImage1', 'bottomModalBody', 'bottomModalLabel'], contents: [['xlink:href', "../../docs/img/manifesto.jpg"],['style', ""],['height', 900],'placeholder text for poster/project introduction', 'Dams & datums > manifesto' ]}
         },
         aboutOpt: {
             fade: {layers:['plan', 'section1', 'section2', 'scale_and_north', 'slideImage2', 'overlays'], type:'id'},
             show: 'bottomModal',
-            updates: {layers:['slideImage1', 'bottomModalBody', 'bottomModalLabel'], contents: [['xlink:href', "../img/manifesto.jpg"],'placeholder text for about modal', 'Dams & datums > about']}
+            updates: {layers:['slideImage1', 'bottomModalBody', 'bottomModalLabel'], contents: [['xlink:href', "../../docs/img/manifesto.jpg"],'placeholder text for about modal', 'Dams & datums > about']}
         },
         s1Opt: {
             fade: {layers:['slideImage2', 'section2', 'icons1','scale_and_north', 'trees1', 'cut1', 'diagrams', 'overlays'], type:'id'},
-            updates: {layers:['slideImage1', 'slideImage1', 'slideImage1'], contents: [['xlink:href', "../img/model3.jpg"],['style', ""],['height', 900]]}
+            updates: {layers:['slideImage1', 'slideImage1', 'slideImage1'], contents: [['xlink:href', "../../docs/img/model3.jpg"],['style', ""],['height', 900]]}
         },
         slideStart: {
             fade: {layers:['plan', 'section1', 'section2', 'scale_and_north', 'slideImage2', 'overlays'], type:'id'},
             click: {layers:['slideImage1', 'slideImage2'], actions:[{advance: 'slideImage1'},{advance: 'slideImage1'}], type:'flickr'},
             photos:{img:
-                    ["../img/slide01.jpg", "../img/slide02.jpg", "../img/slide03.jpg", "../img/slide04.jpg", "../img/slide05.jpg", "../img/slide06.jpg", "../img/slide07.jpg", "../img/slide08.jpg", "../img/slide09.jpg","../img/slide10.jpg"],
+                    ["../../docs/img/slide01.jpg", "../../docs/img/slide02.jpg", "../../docs/img/slide03.jpg", "../../docs/img/slide04.jpg", "../../docs/img/slide05.jpg", "../../docs/img/slide06.jpg", "../../docs/img/slide07.jpg", "../../docs/img/slide08.jpg", "../../docs/img/slide09.jpg","../../docs/img/slide10.jpg"],
                 modals:
                     ["random modal content 1", "random modal content 2", "random modal content 3", "random modal content 4", "random modal content 5", "random modal content 6", "random modal content 7", "random modal content 8", "random modal content 9","random modal content 10"]
                 },
-            updates: {layers:['slideImage1','slideImage1','slideImage1', 'slideCaption'], contents: [['xlink:href', "../img/slide01.jpg"],['style', ""],['height', 900], "random caption 1"]}
+            updates: {layers:['slideImage1','slideImage1','slideImage1', 'slideCaption'], contents: [['xlink:href', "../../docs/img/slide01.jpg"],['style', ""],['height', 900], "random caption 1"]}
         },
         slideNext: {
             fade: {layers:['plan', 'section1', 'section2', 'scale_and_north','overlays'], type:'id'},
@@ -97,17 +97,17 @@ var jsonData = {
         spring: {
             fade: {layers:['images', 'section2', 'icons1','cut1','diagrams', 'plan', 'render2', 'scale_and_north'], type:'id'},
             animateMPosition: 'clip_renders',
-            updates: {layers:['render1'], contents: [['xlink:href', "../img/sect1_SpringDay.jpg"]]}
+            updates: {layers:['render1'], contents: [['xlink:href', "../../docs/img/sect1_SpringDay.jpg"]]}
         },
         fall: {
             fade: {layers:['images', 'section1', 'diagrams_occ','cut2','diagrams', 'plan', 'render2', 'scale_and_north'], type:'id'},
             animateMPosition: 'clip_renders',
-            updates: {layers:['render1'], contents: [['xlink:href', "../img/sect2_FallDay.jpg"]]}
+            updates: {layers:['render1'], contents: [['xlink:href', "../../docs/img/sect2_FallDay.jpg"]]}
         },
         diurnal: {
             fade: {layers:['images', 'section1', 'section2','diagrams', 'plan','scale_and_north'], type:'id'},
             animateMPosition: 'clip_renders',
-            updates: {layers:['render1','render2','render2'], contents: [['xlink:href', "../img/sect2_FallDay.jpg"],['xlink:href', "../img/sect2_FallNight.jpg"], ['style', '']]}
+            updates: {layers:['render1','render2','render2'], contents: [['xlink:href', "../../docs/img/sect2_FallDay.jpg"],['xlink:href', "../../docs/img/sect2_FallNight.jpg"], ['style', '']]}
         },
 
     }
