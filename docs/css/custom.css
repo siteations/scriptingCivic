@@ -68,18 +68,18 @@
 
 
 body {
-	font-family: "texta";
+	font-family: "Texta";
 	overflow: hidden ;
 }
 
 .pgTitle {
-  font-family: "eveleth";
+  font-family: "Eveleth";
   padding-top: 5px;
   margin-bottom: 0px;
 }
 
 .texta {
-  font-family: "texta";
+  font-family: "Texta";
 }
 
 .eveleth {
