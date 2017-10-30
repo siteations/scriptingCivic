@@ -119,6 +119,11 @@ var jsonData = {
                             ],
                     modal: 'bottomModal',
                 }],
+            updates:[
+                {id: 'slideImage1', type:'attr', value:['xlink:href', "./img/manifesto.jpg"]},
+                {id: 'bottomModalBody', type:'text', value: 'placeholder text for about modal'},
+                {id: 'bottomModalLabel', type: 'text', value: 'Dams & datums > about'},
+                    ],
         },
         aboutOpt: {
             fade: ['plan', 'section1', 'section2', 'scale_and_north', 'slideImage2', 'overlays', 'annotations'],
