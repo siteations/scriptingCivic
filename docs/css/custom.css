@@ -175,3 +175,14 @@ svg {
 .imgTest {
   display:none;
 }
+
+.thumbnail {
+  width:100%;
+}
+
+.modalMargin {
+  font-family: 'Eveleth';
+  margin-top: 10px;
+}
+
+

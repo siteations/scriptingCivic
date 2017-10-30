@@ -53,16 +53,24 @@ $(document).ready(()=> {
 		var svg = svgData[0].documentElement
 		svg.setAttribute('class', 'center-block')
 
+
+
 		//add svg to the html
 		$('#svgHere').append(svg)
 
 		loadPoster()
 
+		//sort and clean any of api array's you've brought in...
 		var flickr = sortFlickrLarge(photoData[0])
-		console.log('working photos', flickr)
+		var flickrTrees = {}
+		trees.forEach((tree, i)=>{
+		  flickrTrees[jsonData.photoTags.flora[i]] = tree[0].photos.photo.map(photo=>photo.url_sq)
+		})
 
-		topMenuLoad(menuTop, flickr)
+		console.log('working photos', flickr, flickrTrees)
 
+		//and then feed to the master function, controlling top menu and bottom menu nesting. . .
+		topMenuLoad(menuTop, flickr, flickrTrees)
 
 
 	}); //.done()
@@ -105,6 +113,7 @@ const visTool = function (arr, sel){
 	})
 }
 
+//Task: grab meaning full photos (by size & title - human made, not id #)
 const sortFlickrLarge = function (json){
 	var photos = json.photos.photo
 
@@ -126,7 +135,7 @@ const sortFlickrLarge = function (json){
 }
 
 
-//-----------TASKS BY AREAS--------------------------
+//---------------------INITIAL COMPOSITE FUNCTIONS--------------------------
 
 
 //-----------------Set Initial Visibility of Image--------------------------
@@ -139,12 +148,13 @@ const loadPoster = function(){
 		$('#slideImage1').attr('xlink:href', "../../docs/img/manifesto.jpg").attr('style', "")
 
 		//set up initial visibilities
-		visHide(['plan', 'section1', 'section2', 'scale_and_north', 'slideImage2', 'overlays'], 'id')
+		visHide(['plan', 'section1', 'section2', 'scale_and_north', 'slideImage2', 'overlays','annotations'], 'id')
+
 }
 
 
 //-----------Update options based on top menu (add in additional functions here)--------------------------
-const topMenuLoad = function (obj, flickr){
+const topMenuLoad = function (obj, flickr, flickrTrees){
 	var buttonIds = Object.keys(obj)
 
 	buttonIds.forEach(btn=>{
@@ -155,8 +165,9 @@ const topMenuLoad = function (obj, flickr){
 			$('#pgChoice').text(btn.replace('Btn', ''))
 			$('.bottomMenu').remove()
 
-			layerOptions(obj[btn][0].id, flickr)
+			layerOptions(obj[btn][0].id, flickr, flickrTrees) // THIS LOADS THE VIS FOR THE FIRST BUTTON ON BOTTOM
 
+			//and then we create a new div of buttons to hold the further interactions...
 			newDiv = document.createElement("div")
 			newDiv.setAttribute('class', 'col-2 text-center bottomMenu')
 			$('.footer').prepend(newDiv)
@@ -177,7 +188,7 @@ const topMenuLoad = function (obj, flickr){
 				newDiv.append(newBtn)
 
 				$('.footer').append(newDiv)
-				$(`#${item.id}`).click(event=>layerOptions(event.target.id,  flickr))
+				$(`#${item.id}`).click(event=>layerOptions(event.target.id,  flickr, flickrTrees)) //THIS READS THOSE OPTIONS - A OBJECTS AND SETS UP INTERACTIONS/VISIBILITY
 
 			})
 
@@ -190,7 +201,7 @@ const topMenuLoad = function (obj, flickr){
 // checks based on the bottom menu buttons as listed in the json series of objects
 
 const altVisibility = function(objId){
-	var toHide = menuBottom[objId].fade.layers
+	var toHide = menuBottom[objId].fade
 
 	//which layers are currently hidden
 	var layers = $('g[id]')
@@ -214,7 +225,7 @@ const altVisibility = function(objId){
 }
 
 const altActions = function(objId, flickr){
-	if (menuBottom[objId].click){
+	if (menuBottom[objId].clickSlides){
 		var actionLayers = menuBottom[objId].click.layers
 		var actionActions = menuBottom[objId].click.actions
 		var slideSource = menuBottom[objId].click.type
@@ -222,12 +233,6 @@ const altActions = function(objId, flickr){
 		actionLayers.forEach((layer,i)=>{
 			if (actionActions[i].show){
 				$(`#${layer}`).off('click').click(()=>$(`#${actionActions[i].show}`).modal('show'))
-			} else if (actionActions[i].fadeIn){
-
-			} else if (actionActions[i].fadeOut){
-
-			} else if (actionActions[i].fill){ // plan only - empty others, fill species type
-
 			} else if (actionActions[i].advance){ // slides only
 				$(`#${layer}`).off('click').click(()=>slideshow('slideStart', 'adv', slideSource, flickr))
 			} else if (actionActions[i].reverse){ // slides only
@@ -298,29 +303,50 @@ const slideshow = function(objId, direction, type, flickr){
 	}
 }
 
-const altContent = function(objId, clickNest){
-	console.log(menuBottom[objId], objId)
+const altUpdates = function(objId, otherUpdates, links){
 
-	if (menuBottom[objId].updates && !clickNest){
-		var toEdit = menuBottom[objId].updates.layers
-		var edits = menuBottom[objId].updates.contents
-	} else if (clickNest){
-		var toEdit = menuBottom[objId].click.updates.layers
-		var edits = menuBottom[objId].click.updates.contents
+	if (menuBottom[objId] && menuBottom[objId].updates){
+		var updates = menuBottom[objId].updates
+	} else if (otherUpdates){
+		var updates = otherUpdates
 	}
 
-	if (menuBottom[objId].updates || clickNest){
-		toEdit.forEach((edit,i)=>{
-			if (typeof(edits[i])==='string'){
-				$(`#${edit}`).text(edits[i])
-			} else if (Array.isArray(edits[i]) && edits[i].length===2){
-				$(`#${edit}`).attr(edits[i][0],edits[i][1])
-			} else if (Array.isArray(edits[i]) && edits[i].length>2){ // for complex modals
-				// add later for plant info based on icons
-			}
-		})
+	if (updates){
+		updates.forEach(update=>{
 
+			switch (update.type) {
+				  case 'text':
+				    $(`#${update.id}`).text(update.value)
+				    break;
+				  case 'append':
+				    $(`#${update.id}`).append(update.value)
+				    break;
+				  case 'empty':
+				    $(`#${update.id}`).empty()
+				    break;
+				  case 'attr':
+				    $(`#${update.id}`).attr(update.value[0],update.value[1])
+				    break;
+				  case 'css':
+				    $(`#${update.id}`).css(update.value[0],update.value[1])
+				    break;
+				  case 'class':
+				    $(`#${update.id}`).addClass(update.value)
+				    break;
+				  case 'imgModal':
+				    $(`#${update.id}`).attr('src', links[update.value][0].replace('_s', '_m'))
+				    break;
+				  case 'imgArrModal':
+				    var len = $(`#${update.id}`).find('img').length
+				    var imagArr = [].slice.call($(`#${update.id}`).find('img'))
+				    imagArr.forEach((img, i)=>{img.src = links[update.value][i]})
+				    break;
+				  default:
+				    console.log('add category');
+				}
+			})
 	}
+
 }
 
 const altShow = function(objId){
@@ -348,11 +374,11 @@ const altAnimateClip = function(objId){
 			var anim = menuBottom[objId].animateClip
 
 			if (anim.width){
-			$(`#${anim.layer}`).css('width', '0px').animate({
+			$(`#${anim.id}`).css('width', '0px').animate({
 							width: anim.width
 					}, anim.duration)
 			} else if (anim.height){
-				$(`#${anim.layer}`).css('height', '0px').animate({
+				$(`#${anim.id}`).css('height', '0px').animate({
 							height: anim.height
 					}, anim.duration)
 
@@ -363,32 +389,35 @@ const altAnimateClip = function(objId){
 
 const altTooltips = function(objId){
 	if (menuBottom[objId].tooltip){
-		var tt = menuBottom[objId].tooltip.contents
-		menuBottom[objId].tooltip.layers.forEach((layer,i)=>{
-			menuBottom[objId].tooltip.type.forEach(item =>{
-				$(`#${layer}`).find(item).attr('pointer-event', 'all').addClass('stroke_'+layer)
-			})
+		var attachTo = menuBottom[objId].tooltip.attach
+		var types = menuBottom[objId].tooltip.type.join(',')
+		var tooltips = menuBottom[objId].tooltip.layers
+
+		tooltips.forEach((layer,i)=>{
+
+				$(`#${layer.id}`).find(types).attr('pointer-event', 'all').addClass('stroke_'+layer.id)
+
 
 			var tooltip = document.createElementNS("http://www.w3.org/2000/svg",'text')
-				tooltip.setAttribute('id', 'stroke_'+layer+'_tt')
+				tooltip.setAttribute('id', 'stroke_'+layer.id+'_tt')
 				tooltip.setAttribute('class', 'text-tt')
-				tooltip.append(tt[i])
+				tooltip.append(layer.value)
 
 			var under = document.createElementNS("http://www.w3.org/2000/svg",'rect')
-				under.setAttribute('id', 'stroke_'+layer+'_rect')
+				under.setAttribute('id', 'stroke_'+layer.id+'_rect')
 				under.setAttribute('class', 'rect-tt')
 
-			$(`#${menuBottom[objId].tooltip.overlay}`).append(under).append(tooltip)
+			$(`#${attachTo}`).append(under).append(tooltip)
 
-			$(`.stroke_${layer}`).hover((event)=>{
-					$(`#stroke_${layer}_tt`).attr('x', event.pageX).attr('y', event.pageY-10)
+			$(`.stroke_${layer.id}`).hover((event)=>{
+					$(`#stroke_${layer.id}_tt`).attr('x', event.pageX).attr('y', event.pageY-10)
 
-				var inher = $(`#stroke_${layer}_tt`)[0].textLength.baseVal.value+10
-					$(`#stroke_${layer}_rect`).attr('x', event.pageX-5).attr('y', event.pageY-28).attr('width', inher)
+				var inher = $(`#stroke_${layer.id}_tt`)[0].textLength.baseVal.value+10
+					$(`#stroke_${layer.id}_rect`).attr('x', event.pageX-5).attr('y', event.pageY-28).attr('width', inher)
 
 			}, (event)=>{
-				$(`#stroke_${layer}_tt`).attr('x', '').attr('y', '')
-				$(`#stroke_${layer}_rect`).attr('x', '').attr('y', '').attr('width', '')
+				$(`#stroke_${layer.id}_tt`).attr('x', '').attr('y', '')
+				$(`#stroke_${layer.id}_rect`).attr('x', '').attr('y', '').attr('width', '')
 			})
 
 		})
@@ -396,30 +425,73 @@ const altTooltips = function(objId){
 	}
 }
 
+
 const altIsolate=function(objId){
 	if (menuBottom[objId].isolate){
 		var iso = menuBottom[objId].isolate
 
 		$(`#${iso.trigger}`).off('click').click(()=>{
 			$(`#${iso.layers}`).fadeToggle()
-		})//.off('mouseover')
+		})
 
 	}
 }
 
 const altHighlight = function(objId){
 	if (menuBottom[objId].highlight){
+		var hi = menuBottom[objId].highlight
+
+		hi.forEach(hiGroup=>{
+			var triggers = hiGroup.trigger.map(item=>'#'+item).join(',')
+			var types = hiGroup.type.join(',')
+			var color = $(triggers).find('path').attr(hiGroup.attr)
+
+			$(triggers).hover(()=>{
+				$(`#${hiGroup.layer}`).find(types).attr(hiGroup.attr, color).attr('fill-opacity', hiGroup.opacity)
+			}, ()=>{
+				$(`#${hiGroup.layer}`).find(types).attr(hiGroup.attr, 'none').attr('fill-opacity', 1)
+			})
+		})
 
 	}
 }
 
 
+const altClickModal=function(objId,flickrTrees){
+	if (menuBottom[objId].clickModal){
+		var clickAdd = menuBottom[objId].clickModal
+
+
+		clickAdd.forEach(clickGroup=>{
+			var triggers = clickGroup.trigger.map(item=>'#'+item).join(',')
+			var updates = clickGroup.updates
+			var modalId = clickGroup.modal
+
+			if (clickGroup.searchName){
+				var source = clickGroup.searchName
+
+				var picsSorted = {
+					tempFlora: flickrTrees[source],
+					tempFauna: flickrTrees['alder'],
+					tempProcess: flickrTrees['blueberries'],
+				}
+			}
+
+			$(triggers).click(()=>{
+
+				altUpdates(objId, updates, picsSorted)
+
+				$(`#${modalId}`).modal('show')
+			})
+		})
+	}
+}
 
 //-----------master function for tiggering & adding events from the bottom menu----------------
-const layerOptions = function(objId, flickr){ //event.target.id
-	console.log(objId)
+const layerOptions = function(objId, flickr, flickrTrees){ //event.target.id
+	console.log(objId, flickr, flickrTrees)
 	altVisibility(objId)
-	altContent(objId, null)
+	altUpdates(objId, null)
 	altActions(objId, flickr)
 	altShow(objId)
 	altPositions(objId)
@@ -427,6 +499,7 @@ const layerOptions = function(objId, flickr){ //event.target.id
 	altTooltips(objId)
 	altIsolate(objId)
 	altHighlight(objId)
+	altClickModal(objId, flickrTrees)
 }
 
 
