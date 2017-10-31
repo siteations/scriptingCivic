@@ -85,7 +85,6 @@ This approach should be familiar in that dot notation 'object.function(parameter
 and simply holds those functions as methods held on a defined class .... var map = new mapBox(params) .... map.addLayers(params)
 */
 
-
 //Task: grab meaning full photos (by size & title - human made, not id #)
 const sortFlickrLarge = function (json){
 	var photos = json.photos.photo
@@ -175,9 +174,8 @@ const altVisibility = function(objId){
 
 	//which layers are currently hidden
 	var layers = $('g[id][style="display: none;"]')
-	var isHidden = [].slice.call(layers) // conversion to array
-
-	console.log(isHidden, $(':hidden'))
+	var layersId = layers.map(item=>layers[item].id)
+	var isHidden = [].slice.call(layersId) // conversion to array
 
 	//compare and filter
 	var fadeOutIds = toHide.filter(id=> isHidden.indexOf(id) === -1)
