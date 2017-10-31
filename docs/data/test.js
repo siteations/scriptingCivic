@@ -144,21 +144,37 @@ var jsonData = {
 
         slideStart: {
             fade: ['plan', 'section1', 'section2', 'scale_and_north', 'slideImage2', 'overlays', 'annotations'],
-            click: {layers:['slideImage1', 'slideImage2'], actions:[{advance: 'slideImage1'},{advance: 'slideImage1'}], type:'flickr'},
-            photos:{img:
-                    ["./img/slide01.jpg", "./img/slide02.jpg", "./img/slide03.jpg", "./img/slide04.jpg", "./img/slide05.jpg", "./img/slide06.jpg", "./img/slide07.jpg", "./img/slide08.jpg", "./img/slide09.jpg","./img/slide10.jpg"],
-                modals:
-                    ["random modal content 1", "random modal content 2", "random modal content 3", "random modal content 4", "random modal content 5", "random modal content 6", "random modal content 7", "random modal content 8", "random modal content 9","random modal content 10"]
+            clickSlides: {
+                    trigger: ['slideImage1', 'slideImage2'],
+                    triggerAdv: ['slideNext'],
+                    triggerRev: ['slideLast'],
+                    slides: [
+                        {link: './img/slide01.jpg', title: 'random modal content 1', caption: 'lorem ipsum1'},
+                        {link: './img/slide02.jpg', title: 'random modal content 2', caption: 'lorem ipsum2'},
+                        {link: './img/slide03.jpg', title: 'random modal content 3', caption: 'lorem ipsum3'},
+                        {link: './img/slide04.jpg', title: 'random modal content 4', caption: 'lorem ipsum4'},
+                        {link: './img/slide05.jpg', title: 'random modal content 5', caption: 'lorem ipsum5'},
+                        {link: './img/slide06.jpg', title: 'random modal content 6', caption: 'lorem ipsum6'},
+                        {link: './img/slide07.jpg', title: 'random modal content 7', caption: 'lorem ipsum7'},
+                        {link: './img/slide08.jpg', title: 'random modal content 8', caption: 'lorem ipsum8'},
+                        {link: './img/slide09.jpg', title: 'random modal content 9', caption: 'lorem ipsum9'},
+                        {link: './img/slide10.jpg', title: 'random modal content 10', caption: 'lorem ipsum10'},
+                    ],
+                    source: 'flickr' // flickr or internal
                 },
-            updates: {layers:['slideImage1','slideImage1','slideImage1', 'slideCaption'], contents: [['xlink:href', "./img/slide01.jpg"],['style', ""],['height', 900], "random caption 1"]}
+            updates: [
+                {id: 'slideImage1', type:'attr', value:['xlink:href', "./img/slide01.jpg"]},
+                {id: 'slideImage1', type:'attr', value: ['height', 900]},
+                {id: 'slideImage1', type:'css', value: ['display', 'inherit']}
+                    ],
         },
         slideNext: {
             fade: ['plan', 'section1', 'section2', 'scale_and_north','overlays', 'annotations'],
-            click: {layers:['slideNext', 'slideLast'], actions:[{advance: 'slideImage1'},{reverse: 'slideImage1'}],type:'flickr'},
+            clickSlides: 'placeholder'
         },
         slideLast: {
             fade: ['plan', 'section1', 'section2', 'scale_and_north','overlays', 'annotations'],
-            click: {layers:['slideNext', 'slideLast'], actions:[{advance: 'slideImage1'},{reverse: 'slideImage1'}],type:'flickr'},
+            clickSlides: 'placeholder'
         },
         iFlora: {
             fade: ['d_trails', 'd_camp','section2', 'diagrams', 'diagrams_occ','cut2','images','overlays'],

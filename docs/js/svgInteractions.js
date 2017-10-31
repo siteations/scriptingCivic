@@ -224,36 +224,34 @@ const altVisibility = function(objId){
 
 }
 
-const altActions = function(objId, flickr){
+const altSlides = function(objId, flickr){
 	if (menuBottom[objId].clickSlides){
-		var actionLayers = menuBottom[objId].click.layers
-		var actionActions = menuBottom[objId].click.actions
-		var slideSource = menuBottom[objId].click.type
+		(objId === 'slideNext' || objId === 'slideLast')? objId = 'slideStart' : objId = objId
+		var clickSlides = menuBottom[objId].clickSlides
+		var slideSource = (clickSlides.source === 'flickr')? flickr : clickSlides.slides
+		var slideArr = slideSource.map(slide=>slide.link)
 
-		actionLayers.forEach((layer,i)=>{
-			if (actionActions[i].show){
-				$(`#${layer}`).off('click').click(()=>$(`#${actionActions[i].show}`).modal('show'))
-			} else if (actionActions[i].advance){ // slides only
-				$(`#${layer}`).off('click').click(()=>slideshow('slideStart', 'adv', slideSource, flickr))
-			} else if (actionActions[i].reverse){ // slides only
-				$(`#${layer}`).off('click').click(()=>slideshow('slideStart', 'rev', slideSource, flickr))
-			}
-		})
+		var tr = clickSlides.trigger.map(item=>'#'+item).join(',')
+		var trAdv = clickSlides.triggerAdv.map(item=>'#'+item).join(',')
+		var trRev = clickSlides.triggerRev.map(item=>'#'+item).join(',')
 
+		if (event.target.id !== 'slideNext' && event.target.id !== 'slideLast'){
+			$(tr).click(()=>slideshow(slideSource, 'adv', flickr))
+		} else if (event.target.id === 'slideNext'){
+			slideshow(slideSource, 'adv', flickr)
+		} else if (event.target.id === 'slideLast'){
+			slideshow(slideSource, 'rev', flickr)
+		}
 	}
 
 }
 
 
-const slideshow = function(objId, direction, type, flickr){
-	if (type==='internal' && flickr===null){
-		var arr = menuBottom[objId].photos.img
-		var modals = menuBottom[objId].photos.modals
-	} else if(type==='flickr' && flickr!==null){
-		var arr = flickr.map(item=>item.link)
-		var height = flickr.map(item=>item.height)
-		var modals = flickr.map(item=>item.title)
-	}
+const slideshow = function(slideObjs, direction, flickr){
+	var arr = slideObjs.map(slide=>slide.link)
+	var titles = slideObjs.map(slide=>slide.title)
+	var height = slideObjs.map(slide=>slide.height)
+
 	var current;
 	var next;
 
@@ -277,7 +275,7 @@ const slideshow = function(objId, direction, type, flickr){
 		}
 		$('#slideImage1').fadeOut(1000)
 
-		$('#rightModalLabel').text(modals[next])
+		$('#rightModalLabel').text(titles[next])
 		$('#rightModalBody').text('')
 		$('#rightModal').modal('show')
 
@@ -298,10 +296,11 @@ const slideshow = function(objId, direction, type, flickr){
 			$('#slideImage1').attr('xlink:href', arr[next]).attr('height', 900).fadeIn(1000)
 		}
 		$('#slideImage2').fadeOut(1000)
-		$('#rightModalLabel').text(modals[next])
+		$('#rightModalLabel').text(titles[next])
 		$('#rightModal').modal('show')
 	}
 }
+
 
 const altUpdates = function(objId, otherUpdates, links){
 
@@ -492,7 +491,7 @@ const layerOptions = function(objId, flickr, flickrTrees){ //event.target.id
 	console.log(objId, flickr, flickrTrees)
 	altVisibility(objId)
 	altUpdates(objId, null)
-	altActions(objId, flickr)
+	altSlides(objId, flickr)
 	altShow(objId)
 	altPositions(objId)
 	altAnimateClip(objId)
