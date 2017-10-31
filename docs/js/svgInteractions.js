@@ -236,7 +236,7 @@ const altSlides = function(objId, flickr){
 		var trRev = clickSlides.triggerRev.map(item=>'#'+item).join(',')
 
 		if (event.target.id !== 'slideNext' && event.target.id !== 'slideLast'){
-			$(tr).click(()=>slideshow(slideSource, 'adv', flickr))
+			$(tr).off('click').click(()=>slideshow(slideSource, 'adv', flickr))
 		} else if (event.target.id === 'slideNext'){
 			slideshow(slideSource, 'adv', flickr)
 		} else if (event.target.id === 'slideLast'){
@@ -275,9 +275,11 @@ const slideshow = function(slideObjs, direction, flickr){
 		}
 		$('#slideImage1').fadeOut(1000)
 
-		$('#rightModalLabel').text(titles[next])
-		$('#rightModalBody').text('')
-		$('#rightModal').modal('show')
+		if (titles){
+			$('#rightModalLabel').text(titles[next])
+			$('#rightModalBody').text('')
+			$('#rightModal').modal('show')
+		}
 
 	} else if (sl1 ==='display: none;'){
 
@@ -296,8 +298,11 @@ const slideshow = function(slideObjs, direction, flickr){
 			$('#slideImage1').attr('xlink:href', arr[next]).attr('height', 900).fadeIn(1000)
 		}
 		$('#slideImage2').fadeOut(1000)
-		$('#rightModalLabel').text(titles[next])
-		$('#rightModal').modal('show')
+
+		if (titles){
+			$('#rightModalLabel').text(titles[next])
+			$('#rightModal').modal('show')
+		}
 	}
 }
 
@@ -476,7 +481,7 @@ const altClickModal=function(objId,flickrTrees){
 				}
 			}
 
-			$(triggers).click(()=>{
+			$(triggers).off('click').click(()=>{
 
 				altUpdates(objId, updates, picsSorted)
 

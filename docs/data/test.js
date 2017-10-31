@@ -113,6 +113,7 @@ var jsonData = {
                     trigger: ['slideImage1'],
                     updates:[
                         {id: 'slideImage1', type:'attr', value:['xlink:href', "./img/manifesto.jpg"]},
+                        {id: 'slideImage1', type:'css', value: ['display', 'inherit']},
                         {id: 'slideImage1', type:'attr', value: ['height', 900]},
                         {id: 'bottomModalBody', type:'text', value: 'placeholder text for poster/project introduction'},
                         {id: 'bottomModalLabel', type: 'text', value: 'Dams & datums > manifesto'},
@@ -121,6 +122,7 @@ var jsonData = {
                 }],
             updates:[
                 {id: 'slideImage1', type:'attr', value:['xlink:href', "./img/manifesto.jpg"]},
+                {id: 'slideImage1', type:'css', value: ['display', 'inherit']},
                 {id: 'bottomModalBody', type:'text', value: 'placeholder text for about modal'},
                 {id: 'bottomModalLabel', type: 'text', value: 'Dams & datums > about'},
                     ],
@@ -130,15 +132,29 @@ var jsonData = {
             show: 'bottomModal',
             updates:[
                 {id: 'slideImage1', type:'attr', value:['xlink:href', "./img/manifesto.jpg"]},
+                {id: 'slideImage1', type:'css', value: ['display', 'inherit']},
                 {id: 'bottomModalBody', type:'text', value: 'placeholder text for about modal'},
                 {id: 'bottomModalLabel', type: 'text', value: 'Dams & datums > about'},
                     ],
         },
         s1Opt: {
             fade: ['slideImage2', 'section2', 'icons1','scale_and_north', 'trees1', 'cut1', 'diagrams', 'overlays', 'annotations'],
+                        clickSlides: {
+                    trigger: ['slideImage1', 'slideImage2'],
+                    triggerAdv: [''],
+                    triggerRev: [''],
+                    slides: [
+                        {link: './img/model3.jpg', title:'topo1'},
+                        {link: './img/model2.jpg', title:'topo2'},
+                        {link: './img/model1.jpg', title:'topo3'},
+                    ],
+                    source: 'internal' // flickr or internal
+                },
             updates: [
                 {id: 'slideImage1', type:'attr', value:['xlink:href', "./img/model3.jpg"]},
+                {id: 'slideImage1', type:'css', value: ['display', 'inherit']},
                 {id: 'slideImage1', type:'attr', value: ['height', 900]},
+                {id: 'slideImage2', type:'attr', value: ['height', 900]},
                     ],
         },
 
