@@ -67,8 +67,6 @@ $(document).ready(()=> {
 		  flickrTrees[jsonData.photoTags.flora[i]] = tree[0].photos.photo.map(photo=>photo.url_sq)
 		})
 
-		console.log('working photos', flickr, flickrTrees)
-
 		//and then feed to the master function, controlling top menu and bottom menu nesting. . .
 		topMenuLoad(menuTop, flickr, flickrTrees)
 
@@ -87,31 +85,6 @@ This approach should be familiar in that dot notation 'object.function(parameter
 and simply holds those functions as methods held on a defined class .... var map = new mapBox(params) .... map.addLayers(params)
 */
 
-//Task: reset all visibility to initial load state
-const visInit = function(){
-	$('g[id]').css('display', 'initial')
-}
-
-//Task: hide all layers with selections in array
-const visHide = function (arr, sel){
-	var prefix;
-	if (sel==='id'){prefix='#'} else if (sel==='class'){prefix='.'} else if (sel==='tag'){prefix=''}
-
-	arr.forEach(item=>{
-		$(prefix+item).hide()
-	})
-}
-
-//Task: add tooltips to all layers with selections in array ... this is an array of objects
-const visTool = function (arr, sel){
-	var prefix;
-	if (sel==='id'){prefix='#'} else if (sel==='class'){prefix='.'} else if (sel==='tag'){prefix=''}
-
-	arr.forEach(item=>{
-		$(prefix+item.id).attr('data-toggle','tooltip')
-		$(prefix+item.id).attr('title', item.tooltitle)
-	})
-}
 
 //Task: grab meaning full photos (by size & title - human made, not id #)
 const sortFlickrLarge = function (json){
@@ -134,24 +107,21 @@ const sortFlickrLarge = function (json){
 	return photolinks
 }
 
-
-//---------------------INITIAL COMPOSITE FUNCTIONS--------------------------
-
-
 //-----------------Set Initial Visibility of Image--------------------------
 const loadPoster = function(){
 		//turn everything on again within layered, named svg
-		visInit()
+		$('g[id]').css('display', 'initial')
 
 		//initial layer manipulation - hide or fade off specific layers...
 		//(just be aware the routing is a bit odd given github hosting from docs)
 		$('#slideImage1').attr('xlink:href', "./img/manifesto.jpg").attr('style', "")
 
 		//set up initial visibilities
-		visHide(['plan', 'section1', 'section2', 'scale_and_north', 'slideImage2', 'overlays','annotations'], 'id')
+		$(['plan', 'section1', 'section2', 'scale_and_north', 'slideImage2', 'overlays','annotations'].map(item=>'#'+item).join(',')).hide()
 
 }
 
+//-----------START MAKING COMPOSITE FUNCTIONS
 
 //-----------Update options based on top menu (add in additional functions here)--------------------------
 const topMenuLoad = function (obj, flickr, flickrTrees){
@@ -204,16 +174,10 @@ const altVisibility = function(objId){
 	var toHide = menuBottom[objId].fade
 
 	//which layers are currently hidden
-	var layers = $('g[id]')
+	var layers = $('g[id][style="display: none;"]')
+	var isHidden = [].slice.call(layers) // conversion to array
 
-	var offArray = layers.map(id=> {
-			if (layers[id].style.cssText === 'display: none;'){
-				return layers[id].id
-			}
-		})
-	var isHidden = [].slice.call(offArray)
-
-	console.log(isHidden, $(':hidden')) // note how problematic jquery can be.... so you will need to craft your own selection mechanisms
+	console.log(isHidden, $(':hidden'))
 
 	//compare and filter
 	var fadeOutIds = toHide.filter(id=> isHidden.indexOf(id) === -1)
@@ -493,7 +457,7 @@ const altClickModal=function(objId,flickrTrees){
 
 //-----------master function for tiggering & adding events from the bottom menu----------------
 const layerOptions = function(objId, flickr, flickrTrees){ //event.target.id
-	console.log(objId, flickr, flickrTrees)
+	console.log(objId)
 	altVisibility(objId)
 	altUpdates(objId, null)
 	altSlides(objId, flickr)
