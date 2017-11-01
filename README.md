@@ -1,19 +1,19 @@
 # landscape svg demo
 
-Approx schedule
+### Approx schedule  
 30 min - case reviews  
 10 min - intro & agenda  
 5 min - github, clone, & walk thru of build demo  
 
-10-15 min - svg editing & optimization  
+## 10-15 min - svg editing & optimization  
 [http://www.sarasoueidan.com/blog/svg-tips-for-designers/]  
-  *layer mgmt      
-  *path reduction  
-  *visibility/export settings  
-  *planning for additions - sorting, raster selections, effects
-  *export workflow  
+  * layer mgmt      
+  * path reduction  
+  * visibility/export settings  
+  * planning for additions - sorting, raster selections, effects
+  * export workflow  
     
-10-15 min - svg/jquery imports  
+## 10-15 min - svg/jquery imports  
 [http://tomgermeau.com/2014/02/how-designers-can-create-interactive-prototypes-with-illustrator/]  
     *ajax & python -m SimpleHTTPServer to avoid cross domain issues  
     *defer, ajax, promises - dealing with asynchronicity and scope  
