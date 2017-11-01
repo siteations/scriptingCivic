@@ -1,9 +1,9 @@
 # landscape svg demo
 
 ### Approx schedule  
-30 min - case reviews  
-10 min - intro & agenda  
-5 min - github, clone, & walk thru of build demo  
+* 30 min - case reviews  
+* 10 min - intro & agenda  
+* 5 min - github, clone, & walk thru of build demo  
 
 ## 10-15 min - svg editing & optimization  
 [http://www.sarasoueidan.com/blog/svg-tips-for-designers/]  
