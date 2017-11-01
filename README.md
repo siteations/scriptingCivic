@@ -7,12 +7,11 @@ Approx schedule
 
 10-15 min - svg editing & optimization  
 [http://www.sarasoueidan.com/blog/svg-tips-for-designers/]  
-    *layer mgmt  
-    *naming conventions & layer settings  
-    *path reduction  
-    *visibility/export settings  
-    *planning for additions - sorting, raster selections, effects
-    *export workflow  
+  *layer mgmt      
+  *path reduction  
+  *visibility/export settings  
+  *planning for additions - sorting, raster selections, effects
+  *export workflow  
     
 10-15 min - svg/jquery imports  
 [http://tomgermeau.com/2014/02/how-designers-can-create-interactive-prototypes-with-illustrator/]  
