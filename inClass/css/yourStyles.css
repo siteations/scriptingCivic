@@ -1,37 +1,68 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 3475910, 2017-10-31T19:34:47-0400
+ *
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are
+ * explicitly restricted from using the Licensed Webfonts(s).
+ *
+ * You may obtain a valid license at the URLs below.
+ *
+ * Webfont: CoreMagic by S-Core
+ * URL: https://www.myfonts.com/fonts/s-core/core-magic/regular/
+ * Copyright: Copyright (c) 2014 by S-Core Co., Ltd.. All rights reserved.
+ *
+ * Webfont: Texta-It by Latinotype
+ * URL: https://www.myfonts.com/fonts/latinotype/texta/italic/
+ * Copyright: Copyright (c) 2014 by Daniel Hernandez &amp; Miguel Hernandez. All rights reserved.
+ *
+ * Webfont: Texta-Heavy by Latinotype
+ * URL: https://www.myfonts.com/fonts/latinotype/texta/heavy/
+ * Copyright: Copyright (c) 2014 by Daniel Hernandez &amp; Miguel Hernandez. All rights reserved.
+ *
+ * Webfont: Texta-HeavyItalic by Latinotype
+ * URL: https://www.myfonts.com/fonts/latinotype/texta/heavy-italic/
+ * Copyright: Copyright (c) 2014 by Daniel Hernandez &amp; Miguel Hernandez. All rights reserved.
+ *
+ * Webfont: Texta-Regular by Latinotype
+ * URL: https://www.myfonts.com/fonts/latinotype/texta/regular/
+ * Copyright: Copyright (c) 2014 by Daniel Hernandez &amp; Miguel Hernandez. All rights reserved.
+ *
+ *
+ * License: https://www.myfonts.com/viewlicense?type=web&buildid=3475910
+ * Licensed pageviews: 10,000
+ *
+ * © 2017 MyFonts Inc
+*/
 
+
+
+@font-face {font-family: 'CoreMagic';src: url('../fonts/3509C6_0_0.eot');src: url('../fonts/3509C6_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3509C6_0_0.woff2') format('woff2'),url('../fonts/3509C6_0_0.woff') format('woff'),url('../fonts/3509C6_0_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'Texta';font-weight: normal;font-style: italic;src: url('../fonts/3509C6_1_0.eot');src: url('../fonts/3509C6_1_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3509C6_1_0.woff2') format('woff2'),url('../fonts/3509C6_1_0.woff') format('woff'),url('../fonts/3509C6_1_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'Texta';font-weight: bold;font-style: normal;src: url('../fonts/3509C6_2_0.eot');src: url('../fonts/3509C6_2_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3509C6_2_0.woff2') format('woff2'),url('../fonts/3509C6_2_0.woff') format('woff'),url('../fonts/3509C6_2_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'Texta';font-weight: bold;font-style: italic;src: url('../fonts/3509C6_3_0.eot');src: url('../fonts/3509C6_3_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3509C6_3_0.woff2') format('woff2'),url('../fonts/3509C6_3_0.woff') format('woff'),url('../fonts/3509C6_3_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'Texta';font-weight: normal;font-style: normal;src: url('../fonts/3509C6_4_0.eot');src: url('../fonts/3509C6_4_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3509C6_4_0.woff2') format('woff2'),url('../fonts/3509C6_4_0.woff') format('woff'),url('../fonts/3509C6_4_0.ttf') format('truetype');}
 
 body {
-	font-family: "texta";
+	font-family: "Texta";
 	overflow: hidden ;
 }
 
-.pgTitle {
-  font-family: "eveleth";
-  padding-top: 5px;
-  margin-bottom: 0px;
-}
-
 .texta {
-  font-family: "texta";
+  font-family: "Texta";
 }
 
-.eveleth {
-  font-family: "eveleth";
+.coremagic {
+  font-family: "CoreMagic";
 }
-
-
-svg {
-
-}
-
-.pulse {
-	opacity:0.5;
-	animation-name: buttonpulse;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
 
 .fadeout {
 	animation-name: fadeOff;
@@ -53,58 +84,9 @@ svg {
     100%  {opacity:0;}
 }
 
-@keyframes buttonpulse {
-    0%   {opacity:0.5;}
-    100%  {opacity:1;}
-}
-
-.hidden {
-	opacity: 0;
-}
-
-.header {
-  padding: 5px;
-  width: 101%;
-  background-color: #ffffff;
-  opacity: .9;
-  position: absolute;
-  top:0px;
-  left:0px;
-}
-
-.footer {
-  padding: 5px;
-  width: 101%;
-  background-color: #ffffff;
-  opacity: .9;
-  position: absolute;
-  bottom:0px;
-  left:0px;
-}
-
-.rightModal {
-  margin-right: 20px;
+.leftModal {
+  margin-left: 20px;
     margin-top: 80px;
 }
 
-.bottomModal {
-    margin-top: 450px;
-}
 
-.text-tt {
-  fill:white;
-  font-family: "texta";
-  font-size: 16px;
-  text-anchor: center;
-}
-
-.rect-tt {
-  fill:black;
-  height: 26px;
-  rx:5;
-  ry:5;
-}
-
-.imgTest {
-  display:none;
-}
