@@ -24,7 +24,7 @@
 [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions]  
 [https://developer.mozilla.org/en-US/docs/Web/API/Document]  
 [http://api.jquery.com/]  
-    * familiar dot notion & call back structure, as seen [at mapbox](https://www.mapbox.com/mapbox-gl-js/example/toggle-layers/) or [in d3](https://bl.ocks.org/mbostock/3885304)  
+   * familiar dot notion & call back structure, as seen [at mapbox](https://www.mapbox.com/mapbox-gl-js/example/toggle-layers/) or [in d3](https://bl.ocks.org/mbostock/3885304)  
    * write a function to establish initial visibility of svg layers using basic jQuery selections & events  
    * write a function to fade on/off different layers based on click interactions using more advanced selection, array function expression, and conditional logic  
 
