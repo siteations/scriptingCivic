@@ -14,7 +14,7 @@
   * export workflow  
     
 ## 10-15 min - svg/jquery imports  
-[http://tomgermeau.com/2014/02/how-designers-can-create-interactive-prototypes-with-illustrator/] 
+[http://tomgermeau.com/2014/02/how-designers-can-create-interactive-prototypes-with-illustrator/]   
 [cross-origin](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)  
 [scope](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Variable_scope)  
 [asynch](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Synchronous_and_Asynchronous_Requests)  
