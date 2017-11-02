@@ -21,7 +21,7 @@
 [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)  
    * ajax & python -m SimpleHTTPServer to avoid cross domain issues  
    * defer, ajax, promises - dealing with asynchronicity and scope  
-   * other general file features from index, js, or css layers  
+   * other general file features from index, js, or css layers  [fonts, for instance](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face)
         *note multiple routes for reading/incorporating files*  
         
 ## 10-15 min - wading into jQuery & function programming (from experience with oop plug-ins)  
